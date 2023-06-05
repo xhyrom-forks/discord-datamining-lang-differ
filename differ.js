@@ -96,7 +96,7 @@ function doWork(file1, file2, format) {
   return result;
 }
 
-function diff(strings) {
+export function diff(strings) {
   const removedStrings = [];
   const updatedStrings = [];
   const addedStrings = [];
@@ -146,7 +146,7 @@ export function buildString(type, addedStrings, updatedStrings, removedStrings) 
   return builtString;
 }
 
-function buildDiffString(diffedStrings, type) {
+export function buildDiffString(diffedStrings, type) {
   // i've sort of gotten lost with variable names
   let builtDiff = "";
   diffedStrings.forEach((diffedString) => {
