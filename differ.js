@@ -33,7 +33,7 @@ const formats = {
   inline: {
     startString: {
       strings: "## Strings\n```diff",
-      endpoints: "## Routes\n```diff",
+      routes: "## Routes\n```diff",
     },
     endString: "",
     addedHeader: "### Added\n",
@@ -74,7 +74,7 @@ function doWork(file1, file2, format) {
     removedStrings
   );
   const builtEndpoint = buildString(
-    "endpoints",
+    "routes",
     format,
     addedEndpoints,
     updatedEndpoints,
