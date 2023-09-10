@@ -19,7 +19,8 @@ const formats = {
   codeblock: {
     startString: {
       strings: "## Strings\n```diff",
-      routes: "## Routes\n```diff",
+      routes: "## Endpoints\n```diff", // deprecated, use endpoints
+      endpoints: "## Endpoints\n```diff",
     },
     endString: "```",
     addedHeader: "\n# Added\n",
@@ -33,7 +34,8 @@ const formats = {
   inline: {
     startString: {
       strings: "## Strings\n```diff",
-      routes: "## Routes\n```diff",
+      routes: "## Routes\n```diff", // deprecated, use endpoints
+      endpoints: "## Endpoints\n```diff",
     },
     endString: "",
     addedHeader: "### Added\n",
@@ -74,7 +76,7 @@ function doWork(file1, file2, format) {
     removedStrings
   );
   const builtEndpoint = buildString(
-    "routes",
+    "endpoints",
     format,
     addedEndpoints,
     updatedEndpoints,
