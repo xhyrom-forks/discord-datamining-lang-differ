@@ -15,7 +15,7 @@ function getLangStrings(file) {
   const allStrings = {};
 
   function parseStrings(webpackModule) {
-    const expression = webpackModule?.value?.body?.body?.[2]?.expression;
+    const expression = webpackModule?.value?.body?.body?.[0]?.expression;
     if (!expression) {
       return;
     }
@@ -67,7 +67,7 @@ function getLangStrings(file) {
       if (
         properties.every(
           (suspectedLangModule) =>
-            suspectedLangModule.key.type === "Identifier" &&
+            (suspectedLangModule.key.type === "Identifier" || suspectedLangModule.key.type === "Literal") &&
             suspectedLangModule.value.type === "Literal"
         )
       ) {
