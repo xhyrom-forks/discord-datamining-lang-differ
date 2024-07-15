@@ -97,7 +97,7 @@ function doWork(file1, file2, format) {
   return result;
 }
 
-function diff(strings) {
+export function diff(strings) {
   const removedStrings = [];
   const updatedStrings = [];
   const addedStrings = [];
@@ -122,7 +122,7 @@ function diff(strings) {
   };
 }
 
-function buildString(
+export function buildString(
   type,
   addedStrings,
   updatedStrings,
