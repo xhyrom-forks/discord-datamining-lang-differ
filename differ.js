@@ -49,8 +49,6 @@ const formats = {
   },
 };
 
-let FORMAT;
-
 /**
  * The main work function
  * @param {string} file1 - Contents of first file
@@ -68,17 +66,17 @@ function doWork(file1, file2, format) {
     updatedStrings: updatedEndpoints,
     removedStrings: removedEndpoints,
   } = diff(filesEndpoints);
-
-  FORMAT = format;
-
+  
   const builtString = buildString(
     "strings",
+    format,
     addedStrings,
     updatedStrings,
     removedStrings
   );
   const builtEndpoint = buildString(
     "endpoints",
+    format,
     addedEndpoints,
     updatedEndpoints,
     removedEndpoints
@@ -124,6 +122,7 @@ export function diff(strings) {
 
 export function buildString(
   type,
+  format,
   addedStrings,
   updatedStrings,
   removedStrings
@@ -131,32 +130,32 @@ export function buildString(
   let builtString = "";
   // if any of the following have data, we build a string
   if (addedStrings[0] || updatedStrings[0] || removedStrings[0]) {
-    builtString += formats[FORMAT].startString[type];
+    builtString += formats[format].startString[type];
     // check if there's an entry in the strings array
     if (addedStrings[0]) {
-      builtString += formats[FORMAT].addedHeader;
+      builtString += formats[format].addedHeader;
       // done this cause it's repeated code and people would get mad at me
-      builtString += buildDiffString(addedStrings, "added");
+      builtString += buildDiffString(format, addedStrings, "added");
     }
     // the following two are basically the same as above
     if (updatedStrings[0]) {
-      builtString += formats[FORMAT].updatedHeader;
-      builtString += buildDiffString(updatedStrings, "updated");
+      builtString += formats[format].updatedHeader;
+      builtString += buildDiffString(format, updatedStrings, "updated");
     }
     if (removedStrings[0]) {
-      builtString += formats[FORMAT].removedHeader;
-      builtString += buildDiffString(removedStrings, "removed");
+      builtString += formats[format].removedHeader;
+      builtString += buildDiffString(format, removedStrings, "removed");
     }
-    builtString += formats[FORMAT].endString;
+    builtString += formats[format].endString;
   }
   return builtString;
 }
 
-function buildDiffString(diffedStrings, type) {
+function buildDiffString(format, diffedStrings, type) {
   // i've sort of gotten lost with variable names
   let builtDiff = "";
   diffedStrings.forEach((diffedString) => {
-    builtDiff += formats[FORMAT][type](diffedString);
+    builtDiff += formats[format][type](diffedString);
   });
   return builtDiff;
 }
